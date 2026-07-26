@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #ffffff; scroll-behavior: smooth; overflow-x: clip; }
+  body { font-family: 'Manrope', sans-serif; color: #0c1e46; }
+  a { color: #2e6ff2; text-decoration: none; }
+  a:hover { color: #1b53c9; }
+  * { box-sizing: border-box; }
+</style>
+</helmet>
+
+<!-- ===== HEADER ===== -->
+<header style="position: sticky; top: 0; z-index: 100; background: #2e6ff2; border-bottom: 1px solid rgba(255,255,255,0.18);">
+  <div style="max-width: 1180px; margin: 0 auto; padding: 8px 20px; min-height: 60px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px 18px;">
+    <a href="Лендинг SportTechLab v2.dc.html" style="display: flex; align-items: center; gap: 10px; color: #ffffff; flex-shrink: 0;">
+      <img src="assets/logo-lst-white.png" alt="ЛСТ" style="height: 30px; width: auto; display: block;">
+      <span style="font-family: 'Jost', sans-serif; font-weight: 700; font-size: 12.5px; line-height: 1.15; letter-spacing: 0.2px; color: #ffffff;">Лаборатория<br>спортивных технологий</span>
+    </a>
+    <nav style="display: flex; gap: 8px 18px; margin-left: auto; font-size: 14px; font-weight: 700; flex-wrap: wrap; align-items: center;">
+      <a href="Каталог SportTechLab v2.dc.html" style="color: #ffffff; white-space: nowrap; text-decoration: underline; text-underline-offset: 5px;">Каталог</a>
+      <a href="Лендинг SportTechLab v2.dc.html#custom" style="color: #ffffff; white-space: nowrap;" style-hover="color: #cfe0ff;">Под заказ</a>
+      <a href="Лендинг SportTechLab v2.dc.html#quiz" style="color: #ffffff; white-space: nowrap;" style-hover="color: #cfe0ff;">Подбор</a>
+      <a href="Лендинг SportTechLab v2.dc.html#why" style="color: #ffffff; white-space: nowrap;" style-hover="color: #cfe0ff;">Почему мы</a>
+    </nav>
+    <div style="display: flex; align-items: center; gap: 14px; flex-shrink: 0;">
+      <a href="tel:89652369645" style="font-weight: 800; font-size: 13px; color: #ffffff; white-space: nowrap;">8 965 236-96-45</a>
+      <a href="Лендинг SportTechLab v2.dc.html#lead" style="background: #ffffff; color: #2e6ff2; padding: 10px 18px; border-radius: 100px; font-size: 13px; font-weight: 800; white-space: nowrap; transition: transform 0.2s, box-shadow 0.2s;" style-hover="color: #1b53c9; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(6,26,80,0.3);">Оставить заявку</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PRODUCT ===== -->
+<section data-screen-label="Товар ВВП-01" style="max-width: 1180px; margin: 0 auto; padding: 40px 24px 72px;">
+  <div style="font-size: 13px; font-weight: 700; color: #8494b5; margin-bottom: 24px;"><a href="Каталог SportTechLab v2.dc.html" style="color: #2e6ff2;">Каталог</a> · Прыжок · Платформа ВВП-01</div>
+  <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: start;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="position: relative; border-radius: 20px; overflow: hidden; border: 2px solid #e3eaf8; background: #0c1220;">
+        {{ mainPhotoEl }}
+        <img src="assets/logo-lst-white.png" alt="ЛСТ" style="position: absolute; bottom: 14px; right: 16px; height: 26px; width: auto; opacity: 0.92; filter: drop-shadow(0 3px 9px rgba(6,26,80,0.6));">
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="3">
+          <button onClick="{{ t.select }}" style="padding: 0; border: 2px solid {{ t.border }}; border-radius: 12px; overflow: hidden; cursor: pointer; background: #0c1220; transition: border-color 0.2s;">
+            <img src="{{ t.src }}" alt="фото ВВП-01" style="width: 100%; display: block; aspect-ratio: 1 / 1; object-fit: cover;">
+          </button>
+        </sc-for>
+      </div>
+    </div>
+    <div>
+      <div style="display: inline-block; background: #eaf1ff; color: #2e6ff2; border-radius: 100px; padding: 7px 16px; font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px;">Прыжок · Диагностика</div>
+      <h1 style="font-family: 'Jost', sans-serif; font-size: 34px; font-weight: 600; line-height: 1.15; margin: 0 0 14px; letter-spacing: -0.6px; text-wrap: pretty;">Интеллектуальная платформа для измерения высоты прыжка «ВВП-01»</h1>
+      <p style="font-size: 15.5px; line-height: 1.65; color: #4d5f85; margin: 0 0 22px;">Контактная платформа для точной диагностики взрывной силы: измеряет высоту вертикального прыжка по времени полёта и автоматически рассчитывает мощность. Полноценная замена дорогим импортным силовым платформам для спортшкол, команд и фондов.</p>
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px;">
+        <div style="display: flex; gap: 10px; font-size: 14.5px; color: #4d5f85;"><span style="color: #2e6ff2; font-weight: 800;">+</span><span>Протоколы тестирования: прыжок с места, с замахом (Абалаков), прыжок из приседа, серия прыжков</span></div>
+        <div style="display: flex; gap: 10px; font-size: 14.5px; color: #4d5f85;"><span style="color: #2e6ff2; font-weight: 800;">+</span><span>Мгновенный результат на дисплее и передача статистики в приложение по Bluetooth</span></div>
+        <div style="display: flex; gap: 10px; font-size: 14.5px; color: #4d5f85;"><span style="color: #2e6ff2; font-weight: 800;">+</span><span>Прочное антискользящее покрытие, выдерживает нагрузку до 200 кг</span></div>
+      </div>
+      <div style="background: #f5f8fe; border: 2px solid #e3eaf8; border-radius: 20px; padding: 22px 24px; margin-bottom: 22px;">
+        <div style="font-family: 'Jost', sans-serif; font-weight: 700; font-size: 24px; margin-bottom: 4px;">Цена по запросу</div>
+        <div style="font-size: 13.5px; color: #667699; line-height: 1.5;">Для фондов и госорганизаций — спецусловия. Гарантия 1 год с обслуживанием.</div>
+      </div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="Лендинг SportTechLab v2.dc.html#lead" style="background: #2e6ff2; color: #ffffff; padding: 16px 32px; border-radius: 100px; font-weight: 800; font-size: 15px; transition: background 0.2s;" style-hover="background: #1b53c9; color: #ffffff;">Узнать цену</a>
+        <a href="tel:89652369645" style="border: 2px solid #e3eaf8; color: #0c1e46; padding: 14px 30px; border-radius: 100px; font-weight: 800; font-size: 15px; transition: border-color 0.2s;" style-hover="border-color: #2e6ff2; color: #2e6ff2;">8 965 236-96-45</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DETAILS ===== -->
+<section style="background: #f5f8fe; border-top: 1px solid #e3eaf8; border-bottom: 1px solid #e3eaf8;">
+  <div style="max-width: 1180px; margin: 0 auto; padding: 64px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;">
+    <div style="background: #ffffff; border: 2px solid #e3eaf8; border-radius: 20px; padding: 30px;">
+      <h2 style="font-family: 'Jost', sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 16px;">Что измеряет</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14.5px; color: #4d5f85; line-height: 1.6;">
+        <div style="display: flex; gap: 12px;"><span style="font-family: 'Jost', sans-serif; color: #2e6ff2; font-weight: 700;">01</span><span>Высоту вертикального прыжка по времени безопорной фазы</span></div>
+        <div style="display: flex; gap: 12px;"><span style="font-family: 'Jost', sans-serif; color: #2e6ff2; font-weight: 700;">02</span><span>Мощность и взрывную силу ног, индекс реактивной силы (RSI)</span></div>
+        <div style="display: flex; gap: 12px;"><span style="font-family: 'Jost', sans-serif; color: #2e6ff2; font-weight: 700;">03</span><span>Динамику показателей спортсмена от теста к тесту в приложении</span></div>
+      </div>
+      <h2 style="font-family: 'Jost', sans-serif; font-size: 22px; font-weight: 600; margin: 28px 0 16px;">Комплект поставки</h2>
+      <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; color: #4d5f85; line-height: 1.5;">
+        <span>· Контактная платформа ВВП-01 — 1 шт</span>
+        <span>· Пульт / дисплей результатов — 1 шт</span>
+        <span>· Кабель Type-C для зарядки — 1 шт</span>
+        <span>· Сумка-чехол для переноски — 1 шт</span>
+        <span>· Доступ к мобильному приложению статистики</span>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      <div style="background: #ffffff; border: 2px solid #e3eaf8; border-radius: 20px; padding: 30px;">
+        <h2 style="font-family: 'Jost', sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 16px;">Технические характеристики</h2>
+        <div style="display: flex; flex-direction: column; font-size: 14.5px;">
+          <sc-for list="{{ specs }}" as="s" hint-placeholder-count="8">
+            <div style="display: flex; justify-content: space-between; gap: 20px; padding: 10px 0; border-bottom: 1px solid #eef2fa;">
+              <span style="color: #667699;">{{ s.k }}</span>
+              <span style="font-weight: 800; text-align: right;">{{ s.v }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background: #2e6ff2; color: #ffffff; border-radius: 20px; padding: 28px;">
+        <div style="font-family: 'Jost', sans-serif; font-weight: 600; font-size: 20px; margin-bottom: 8px;">Кастомизация под заказ</div>
+        <div style="font-size: 14px; color: #d8e5ff; line-height: 1.6; margin-bottom: 18px;">Для команд и фондов: брендирование платформы, ваш логотип на дисплее, доработка протоколов тестирования и приложения под вашу методику.</div>
+        <a href="Лендинг SportTechLab v2.dc.html#custom" style="display: inline-block; background: #ffffff; color: #2e6ff2; padding: 12px 24px; border-radius: 100px; font-weight: 800; font-size: 14px;" style-hover="color: #1b53c9;">Обсудить проект</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer style="background: #0c1e46; color: #8ea4cf;">
+  <div style="max-width: 1180px; margin: 0 auto; padding: 36px 24px; display: flex; align-items: center; gap: 28px; font-size: 14px; flex-wrap: wrap;">
+    <img src="assets/logo-lst-white.png" alt="ЛСТ" style="height: 24px; width: auto; display: block;">
+    <span style="font-family: 'Jost', sans-serif; font-weight: 700; color: #ffffff; font-size: 14px;">Лаборатория спортивных технологий</span>
+    <a href="Каталог SportTechLab v2.dc.html" style="color: #8ea4cf;" style-hover="color: #ffffff;">Каталог</a>
+    <a href="Лендинг SportTechLab v2.dc.html#custom" style="color: #8ea4cf;" style-hover="color: #ffffff;">Под заказ</a>
+    <a href="#" style="color: #8ea4cf;" style-hover="color: #ffffff;">VK (скоро)</a>
+    <span style="margin-left: auto;">Москва · работаем по всей России · <a href="tel:89652369645" style="color: #cfe0ff;">8 965 236-96-45</a></span>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { photo: 0 };
+  static PHOTOS = ['assets/vvp01-clean.png', 'assets/vvp01-platform.png', 'assets/vvp01-receiver.png'];
+  renderVals() {
+    const i = this.state.photo;
+    const mainPhotoEl = React.createElement('img', {
+      src: Component.PHOTOS[i],
+      alt: 'Интеллектуальная платформа ВВП-01',
+      style: { width: '100%', display: 'block', aspectRatio: '4 / 3', objectFit: 'cover' }
+    });
+    return {
+      mainPhotoEl,
+      thumbs: Component.PHOTOS.map((src, idx) => ({
+        src,
+        border: idx === i ? '#2e6ff2' : '#e3eaf8',
+        select: () => this.setState({ photo: idx })
+      })),
+      specs: [
+        { k: 'Метод измерения', v: 'по времени полёта' },
+        { k: 'Диапазон высоты прыжка', v: '5–99 см' },
+        { k: 'Погрешность', v: 'не более 0,5 см' },
+        { k: 'Протоколы тестов', v: '4 режима' },
+        { k: 'Макс. нагрузка', v: '200 кг' },
+        { k: 'Связь', v: 'Bluetooth 5.0' },
+        { k: 'Питание', v: 'Li-аккумулятор, Type-C' },
+        { k: 'Время работы', v: 'не менее 12 часов' },
+        { k: 'Размер платформы', v: '600×450 мм' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
