@@ -1,161 +1,827 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-<style>
-  html, body { margin: 0; padding: 0; background: #ffffff; scroll-behavior: smooth; overflow-x: clip; }
-  body { font-family: 'Manrope', sans-serif; color: #0c1e46; }
-  a { color: #2e6ff2; text-decoration: none; }
-  a:hover { color: #1b53c9; }
-  * { box-sizing: border-box; }
-</style>
-</helmet>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./support.js"></script>
+  </head>
+  <body>
+    <x-dc>
+      <helmet>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap"
+          rel="stylesheet"
+        />
+        <style>
+          html,
+          body {
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            scroll-behavior: smooth;
+            overflow-x: clip;
+          }
+          body {
+            font-family: "Manrope", sans-serif;
+            color: #0c1e46;
+          }
+          a {
+            color: #2e6ff2;
+            text-decoration: none;
+          }
+          a:hover {
+            color: #1b53c9;
+          }
+          * {
+            box-sizing: border-box;
+          }
+        </style>
+      </helmet>
 
-<!-- ===== HEADER ===== -->
-<header style="position: sticky; top: 0; z-index: 100; background: #2e6ff2; border-bottom: 1px solid rgba(255,255,255,0.18);">
-  <div style="max-width: 1180px; margin: 0 auto; padding: 8px 20px; min-height: 60px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px 18px;">
-    <a href="Лендинг SportTechLab v2.dc.html" style="display: flex; align-items: center; gap: 10px; color: #ffffff; flex-shrink: 0;">
-      <img src="assets/logo-lst-white.png" alt="ЛСТ" style="height: 30px; width: auto; display: block;">
-      <span style="font-family: 'Jost', sans-serif; font-weight: 700; font-size: 12.5px; line-height: 1.15; letter-spacing: 0.2px; color: #ffffff;">Лаборатория<br>спортивных технологий</span>
-    </a>
-    <nav style="display: flex; gap: 8px 18px; margin-left: auto; font-size: 14px; font-weight: 700; flex-wrap: wrap; align-items: center;">
-      <a href="Каталог SportTechLab v2.dc.html" style="color: #ffffff; white-space: nowrap; text-decoration: underline; text-underline-offset: 5px;">Каталог</a>
-      <a href="Лендинг SportTechLab v2.dc.html#custom" style="color: #ffffff; white-space: nowrap;" style-hover="color: #cfe0ff;">Под заказ</a>
-      <a href="Лендинг SportTechLab v2.dc.html#quiz" style="color: #ffffff; white-space: nowrap;" style-hover="color: #cfe0ff;">Подбор</a>
-      <a href="Лендинг SportTechLab v2.dc.html#why" style="color: #ffffff; white-space: nowrap;" style-hover="color: #cfe0ff;">Почему мы</a>
-    </nav>
-    <div style="display: flex; align-items: center; gap: 14px; flex-shrink: 0;">
-      <a href="tel:89652369645" style="font-weight: 800; font-size: 13px; color: #ffffff; white-space: nowrap;">8 965 236-96-45</a>
-      <a href="Лендинг SportTechLab v2.dc.html#lead" style="background: #ffffff; color: #2e6ff2; padding: 10px 18px; border-radius: 100px; font-size: 13px; font-weight: 800; white-space: nowrap; transition: transform 0.2s, box-shadow 0.2s;" style-hover="color: #1b53c9; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(6,26,80,0.3);">Оставить заявку</a>
-    </div>
-  </div>
-</header>
-
-<!-- ===== PRODUCT ===== -->
-<section data-screen-label="Товар РЭ-01" style="max-width: 1180px; margin: 0 auto; padding: 40px 24px 72px;">
-  <div style="font-size: 13px; font-weight: 700; color: #8494b5; margin-bottom: 24px;"><a href="Каталог SportTechLab v2.dc.html" style="color: #2e6ff2;">Каталог</a> · Антропометрия · Ростомер РЭ-01</div>
-  <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: start;">
-    <div style="display: flex; flex-direction: column; gap: 12px;">
-      <div style="position: relative; border-radius: 20px; overflow: hidden; border: 2px solid #e3eaf8; background: #f5f8fe;">
-        {{ mainPhotoEl }}
-        <img src="assets/logo-lst-white.png" alt="ЛСТ" style="position: absolute; bottom: 14px; right: 16px; height: 24px; width: auto; opacity: 0.85; filter: drop-shadow(0 3px 9px rgba(6,26,80,0.35));">
-      </div>
-      <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-        <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="6">
-          <button onClick="{{ t.select }}" style="padding: 0; border: 2px solid {{ t.border }}; border-radius: 10px; overflow: hidden; cursor: pointer; background: #f5f8fe; transition: border-color 0.2s;">
-            <img src="{{ t.src }}" alt="фото ростомера" style="width: 100%; display: block; aspect-ratio: 1 / 1; object-fit: cover;">
-          </button>
-        </sc-for>
-      </div>
-    </div>
-    <div>
-      <div style="display: inline-block; background: #eaf1ff; color: #2e6ff2; border-radius: 100px; padding: 7px 16px; font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px;">Антропометрия · Ростомер</div>
-      <h1 style="font-family: 'Jost', sans-serif; font-size: 34px; font-weight: 600; line-height: 1.15; margin: 0 0 14px; letter-spacing: -0.6px; text-wrap: pretty;">Ростомер (антропометр) лазерный РЭ-01</h1>
-      <p style="font-size: 15.5px; line-height: 1.65; color: #4d5f85; margin: 0 0 22px;">Прибор для быстрого и точного измерения роста и учёта антропометрических данных спортсменов и любых пользователей. Построен на базе ультратонкого лазерного дальномера с HD-дисплеем: высокоточная оптическая линза и отклик 0,1 с обеспечивают мгновенный результат при любых сценариях.</p>
-      <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px;">
-        <div style="display: flex; gap: 10px; font-size: 14.5px; color: #4d5f85;"><span style="color: #2e6ff2; font-weight: 800;">+</span><span>Погрешность измерения ±2 мм, шаг измерения 1 мм</span></div>
-        <div style="display: flex; gap: 10px; font-size: 14.5px; color: #4d5f85;"><span style="color: #2e6ff2; font-weight: 800;">+</span><span>Встроенный уровень исключает ошибки при измерении, пластина фиксирует темя</span></div>
-        <div style="display: flex; gap: 10px; font-size: 14.5px; color: #4d5f85;"><span style="color: #2e6ff2; font-weight: 800;">+</span><span>Корпус из авиационного алюминиевого сплава, литиевый аккумулятор, зарядка USB</span></div>
-      </div>
-      <div style="background: #f5f8fe; border: 2px solid #e3eaf8; border-radius: 20px; padding: 22px 24px; margin-bottom: 22px;">
-        <div style="font-family: 'Jost', sans-serif; font-weight: 700; font-size: 24px; margin-bottom: 4px;">Цена по запросу</div>
-        <div style="font-size: 13.5px; color: #667699; line-height: 1.5;">Для фондов и госорганизаций — спецусловия. Гарантия 1 год с обслуживанием.</div>
-      </div>
-      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-        <a href="Лендинг SportTechLab v2.dc.html#lead" style="background: #2e6ff2; color: #ffffff; padding: 16px 32px; border-radius: 100px; font-weight: 800; font-size: 15px; transition: background 0.2s;" style-hover="background: #1b53c9; color: #ffffff;">Узнать цену</a>
-        <a href="tel:89652369645" style="border: 2px solid #e3eaf8; color: #0c1e46; padding: 14px 30px; border-radius: 100px; font-weight: 800; font-size: 15px; transition: border-color 0.2s;" style-hover="border-color: #2e6ff2; color: #2e6ff2;">8 965 236-96-45</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== DETAILS ===== -->
-<section style="background: #f5f8fe; border-top: 1px solid #e3eaf8; border-bottom: 1px solid #e3eaf8;">
-  <div style="max-width: 1180px; margin: 0 auto; padding: 64px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;">
-    <div style="display: flex; flex-direction: column; gap: 20px;">
-      <div style="background: #ffffff; border: 2px solid #e3eaf8; border-radius: 20px; padding: 30px;">
-        <h2 style="font-family: 'Jost', sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 16px;">Как измерять</h2>
-        <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14.5px; color: #4d5f85; line-height: 1.6;">
-          <div style="display: flex; gap: 12px;"><span style="font-family: 'Jost', sans-serif; color: #2e6ff2; font-weight: 700;">01</span><span>Приложите пластину прибора к макушке так, чтобы корпус находился перед лицом, а пластина — горизонтально по уровню</span></div>
-          <div style="display: flex; gap: 12px;"><span style="font-family: 'Jost', sans-serif; color: #2e6ff2; font-weight: 700;">02</span><span>Нажмите кнопку — включится лазер; нажмите ещё раз для замера за одну секунду</span></div>
-          <div style="display: flex; gap: 12px;"><span style="font-family: 'Jost', sans-serif; color: #2e6ff2; font-weight: 700;">03</span><span>На дисплее отобразится значение роста в метрах. При необходимости повторите измерение</span></div>
-        </div>
-      </div>
-      <div style="background: #2e6ff2; color: #ffffff; border-radius: 20px; padding: 28px;">
-        <div style="font-family: 'Jost', sans-serif; font-weight: 600; font-size: 20px; margin-bottom: 8px;">Кастомизация под заказ</div>
-        <div style="font-size: 14px; color: #d8e5ff; line-height: 1.6; margin-bottom: 18px;">Для команд и фондов: логотип на корпусе и дисплее, интеграция передачи данных в вашу базу антропометрии, доработка под методику.</div>
-        <a href="Лендинг SportTechLab v2.dc.html#custom" style="display: inline-block; background: #ffffff; color: #2e6ff2; padding: 12px 24px; border-radius: 100px; font-weight: 800; font-size: 14px;" style-hover="color: #1b53c9;">Обсудить проект</a>
-      </div>
-    </div>
-    <div style="background: #ffffff; border: 2px solid #e3eaf8; border-radius: 20px; padding: 30px;">
-      <h2 style="font-family: 'Jost', sans-serif; font-size: 22px; font-weight: 600; margin: 0 0 16px;">Технические характеристики</h2>
-      <div style="display: flex; flex-direction: column; font-size: 14.5px;">
-        <sc-for list="{{ specs }}" as="s" hint-placeholder-count="10">
-          <div style="display: flex; justify-content: space-between; gap: 20px; padding: 10px 0; border-bottom: 1px solid #eef2fa;">
-            <span style="color: #667699;">{{ s.k }}</span>
-            <span style="font-weight: 800; text-align: right;">{{ s.v }}</span>
+      <!-- ===== HEADER ===== -->
+      <header
+        style="
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          background: #2e6ff2;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        "
+      >
+        <div
+          style="
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 8px 20px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px 18px;
+          "
+        >
+          <a
+            href="Лендинг SportTechLab v2.dc.html"
+            style="
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              color: #ffffff;
+              flex-shrink: 0;
+            "
+          >
+            <img
+              src="assets/logo-lst-white.png"
+              alt="ЛСТ"
+              style="height: 30px; width: auto; display: block"
+            />
+            <span
+              style="
+                font-family: &quot;Jost&quot;, sans-serif;
+                font-weight: 700;
+                font-size: 12.5px;
+                line-height: 1.15;
+                letter-spacing: 0.2px;
+                color: #ffffff;
+              "
+              >Лаборатория<br />спортивных технологий</span
+            >
+          </a>
+          <nav
+            style="
+              display: flex;
+              gap: 8px 18px;
+              margin-left: auto;
+              font-size: 14px;
+              font-weight: 700;
+              flex-wrap: wrap;
+              align-items: center;
+            "
+          >
+            <a
+              href="Каталог SportTechLab v2.dc.html"
+              style="
+                color: #ffffff;
+                white-space: nowrap;
+                text-decoration: underline;
+                text-underline-offset: 5px;
+              "
+              >Каталог</a
+            >
+            <a
+              href="Лендинг SportTechLab v2.dc.html#custom"
+              style="color: #ffffff; white-space: nowrap"
+              style-hover="color: #cfe0ff;"
+              >Под заказ</a
+            >
+            <a
+              href="Лендинг SportTechLab v2.dc.html#quiz"
+              style="color: #ffffff; white-space: nowrap"
+              style-hover="color: #cfe0ff;"
+              >Подбор</a
+            >
+            <a
+              href="Лендинг SportTechLab v2.dc.html#why"
+              style="color: #ffffff; white-space: nowrap"
+              style-hover="color: #cfe0ff;"
+              >Почему мы</a
+            >
+          </nav>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 14px;
+              flex-shrink: 0;
+            "
+          >
+            <a
+              href="tel:89652369645"
+              style="
+                font-weight: 800;
+                font-size: 13px;
+                color: #ffffff;
+                white-space: nowrap;
+              "
+              >8 965 236-96-45</a
+            >
+            <button
+              onClick="{{ openModal }}"
+              style="
+                background: #ffffff;
+                color: #2e6ff2;
+                padding: 10px 18px;
+                border-radius: 100px;
+                font-size: 13px;
+                font-weight: 800;
+                font-family: &quot;Manrope&quot;, sans-serif;
+                border: none;
+                cursor: pointer;
+                white-space: nowrap;
+                transition:
+                  transform 0.2s,
+                  box-shadow 0.2s;
+              "
+              style-hover="color: #1b53c9; transform: translateY(-1px); box-shadow: 0 6px 18px rgba(6,26,80,0.3);"
+            >
+              Оставить заявку
+            </button>
           </div>
-        </sc-for>
-      </div>
-    </div>
-  </div>
-</section>
+        </div>
+      </header>
 
-<!-- ===== FOOTER ===== -->
-<footer style="background: #0c1e46; color: #8ea4cf;">
-  <div style="max-width: 1180px; margin: 0 auto; padding: 36px 24px; display: flex; align-items: center; gap: 28px; font-size: 14px; flex-wrap: wrap;">
-    <img src="assets/logo-lst-white.png" alt="ЛСТ" style="height: 24px; width: auto; display: block;">
-    <span style="font-family: 'Jost', sans-serif; font-weight: 700; color: #ffffff; font-size: 14px;">Лаборатория спортивных технологий</span>
-    <a href="Каталог SportTechLab v2.dc.html" style="color: #8ea4cf;" style-hover="color: #ffffff;">Каталог</a>
-    <a href="Лендинг SportTechLab v2.dc.html#custom" style="color: #8ea4cf;" style-hover="color: #ffffff;">Под заказ</a>
-    <a href="#" style="color: #8ea4cf;" style-hover="color: #ffffff;">VK (скоро)</a>
-    <span style="margin-left: auto;">Москва · работаем по всей России · <a href="tel:89652369645" style="color: #cfe0ff;">8 965 236-96-45</a></span>
-  </div>
-</footer>
-</x-dc>
-<script type="text/x-dc" data-dc-script>
-class Component extends DCLogic {
-  state = { photo: 0 };
-  static PHOTOS = ['assets/re01-1.png', 'assets/re01-2.png', 'assets/re01-4.png', 'assets/re01-3.png', 'assets/re01-5.png', 'assets/re01-6.png'];
-  renderVals() {
-    const i = this.state.photo;
-    const mainPhotoEl = React.createElement('img', {
-      src: Component.PHOTOS[i],
-      alt: 'Ростомер лазерный РЭ-01',
-      style: { width: '100%', display: 'block', aspectRatio: '4 / 3', objectFit: 'contain', background: '#f5f8fe' }
-    });
-    return {
-      mainPhotoEl,
-      thumbs: Component.PHOTOS.map((src, idx) => ({
-        src,
-        border: idx === i ? '#2e6ff2' : '#e3eaf8',
-        select: () => this.setState({ photo: idx })
-      })),
-      specs: [
-        { k: 'Погрешность', v: '±2 мм' },
-        { k: 'Шаг измерения', v: '1 мм' },
-        { k: 'Отклик', v: '0,1 с' },
-        { k: 'Класс лазера', v: 'II' },
-        { k: 'Габариты', v: '300×65×30±5 мм' },
-        { k: 'Вес', v: '0,110 кг ±5 г' },
-        { k: 'Аккумулятор', v: 'литиевый, 250 мА·ч' },
-        { k: 'Зарядка', v: 'кабель USB' },
-        { k: 'Время работы', v: 'не менее 5 часов' },
-        { k: 'Полная зарядка', v: '1,5–2 ч' },
-        { k: 'Автоотключение лазера', v: '15 с' },
-        { k: 'Хранение заряда', v: 'не менее 6 мес.' }
-      ]
-    };
-  }
-}
-</script>
-</body>
+      <!-- ===== PRODUCT ===== -->
+      <section
+        data-screen-label="Товар РЭ-01"
+        style="max-width: 1180px; margin: 0 auto; padding: 40px 24px 72px"
+      >
+        <div
+          style="
+            font-size: 13px;
+            font-weight: 700;
+            color: #8494b5;
+            margin-bottom: 24px;
+          "
+        >
+          <a href="Каталог SportTechLab v2.dc.html" style="color: #2e6ff2"
+            >Каталог</a
+          >
+          · Антропометрия · Ростомер РЭ-01
+        </div>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 48px;
+            align-items: start;
+          "
+        >
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <div
+              style="
+                position: relative;
+                border-radius: 20px;
+                overflow: hidden;
+                border: 2px solid #e3eaf8;
+                background: #f5f8fe;
+              "
+            >
+              {{ mainPhotoEl }}
+              <img
+                src="assets/logo-lst-white.png"
+                alt="ЛСТ"
+                style="
+                  position: absolute;
+                  bottom: 14px;
+                  right: 16px;
+                  height: 24px;
+                  width: auto;
+                  opacity: 0.85;
+                  filter: drop-shadow(0 3px 9px rgba(6, 26, 80, 0.35));
+                "
+              />
+            </div>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 8px;
+              "
+            >
+              <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="6">
+                <button
+                  onClick="{{ t.select }}"
+                  style="padding: 0; border: 2px solid {{ t.border }}; border-radius: 10px; overflow: hidden; cursor: pointer; background: #f5f8fe; transition: border-color 0.2s;"
+                >
+                  <img
+                    src="{{ t.src }}"
+                    alt="фото ростомера"
+                    style="
+                      width: 100%;
+                      display: block;
+                      aspect-ratio: 1 / 1;
+                      object-fit: cover;
+                    "
+                  />
+                </button>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <div
+              style="
+                display: inline-block;
+                background: #eaf1ff;
+                color: #2e6ff2;
+                border-radius: 100px;
+                padding: 7px 16px;
+                font-family: &quot;Jost&quot;, sans-serif;
+                font-size: 12px;
+                font-weight: 700;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                margin-bottom: 16px;
+              "
+            >
+              Антропометрия · Ростомер
+            </div>
+            <h1
+              style="
+                font-family: &quot;Jost&quot;, sans-serif;
+                font-size: 34px;
+                font-weight: 600;
+                line-height: 1.15;
+                margin: 0 0 14px;
+                letter-spacing: -0.6px;
+                text-wrap: pretty;
+              "
+            >
+              Ростомер (антропометр) лазерный РЭ-01
+            </h1>
+            <p
+              style="
+                font-size: 15.5px;
+                line-height: 1.65;
+                color: #4d5f85;
+                margin: 0 0 22px;
+              "
+            >
+              Прибор для быстрого и точного измерения роста и учёта
+              антропометрических данных спортсменов и любых пользователей.
+              Построен на базе ультратонкого лазерного дальномера с HD-дисплеем:
+              высокоточная оптическая линза и отклик 0,1 с обеспечивают
+              мгновенный результат при любых сценариях.
+            </p>
+            <div
+              style="
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 26px;
+              "
+            >
+              <div
+                style="
+                  display: flex;
+                  gap: 10px;
+                  font-size: 14.5px;
+                  color: #4d5f85;
+                "
+              >
+                <span style="color: #2e6ff2; font-weight: 800">+</span
+                ><span>Погрешность измерения ±2 мм, шаг измерения 1 мм</span>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  gap: 10px;
+                  font-size: 14.5px;
+                  color: #4d5f85;
+                "
+              >
+                <span style="color: #2e6ff2; font-weight: 800">+</span
+                ><span
+                  >Встроенный уровень исключает ошибки при измерении, пластина
+                  фиксирует темя</span
+                >
+              </div>
+              <div
+                style="
+                  display: flex;
+                  gap: 10px;
+                  font-size: 14.5px;
+                  color: #4d5f85;
+                "
+              >
+                <span style="color: #2e6ff2; font-weight: 800">+</span
+                ><span
+                  >Корпус из авиационного алюминиевого сплава, литиевый
+                  аккумулятор, зарядка USB</span
+                >
+              </div>
+            </div>
+            <div
+              style="
+                background: #f5f8fe;
+                border: 2px solid #e3eaf8;
+                border-radius: 20px;
+                padding: 22px 24px;
+                margin-bottom: 22px;
+              "
+            >
+              <div
+                style="
+                  font-family: &quot;Jost&quot;, sans-serif;
+                  font-weight: 700;
+                  font-size: 24px;
+                  margin-bottom: 4px;
+                "
+              >
+                Цена по запросу
+              </div>
+              <div style="font-size: 13.5px; color: #667699; line-height: 1.5">
+                Для фондов и госорганизаций — спецусловия. Гарантия 1 год с
+                обслуживанием.
+              </div>
+            </div>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap">
+              <button
+                onClick="{{ openModal }}"
+                style="
+                  background: #2e6ff2;
+                  color: #ffffff;
+                  padding: 16px 32px;
+                  border-radius: 100px;
+                  font-weight: 800;
+                  font-size: 15px;
+                  font-family: &quot;Manrope&quot;, sans-serif;
+                  border: none;
+                  cursor: pointer;
+                  transition: background 0.2s;
+                "
+                style-hover="background: #1b53c9; color: #ffffff;"
+              >
+                Узнать цену
+              </button>
+              <a
+                href="tel:89652369645"
+                style="
+                  border: 2px solid #e3eaf8;
+                  color: #0c1e46;
+                  padding: 14px 30px;
+                  border-radius: 100px;
+                  font-weight: 800;
+                  font-size: 15px;
+                  transition: border-color 0.2s;
+                "
+                style-hover="border-color: #2e6ff2; color: #2e6ff2;"
+                >8 965 236-96-45</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== DETAILS ===== -->
+      <section
+        style="
+          background: #f5f8fe;
+          border-top: 1px solid #e3eaf8;
+          border-bottom: 1px solid #e3eaf8;
+        "
+      >
+        <div
+          style="
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 64px 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: start;
+          "
+        >
+          <div style="display: flex; flex-direction: column; gap: 20px">
+            <div
+              style="
+                background: #ffffff;
+                border: 2px solid #e3eaf8;
+                border-radius: 20px;
+                padding: 30px;
+              "
+            >
+              <h2
+                style="
+                  font-family: &quot;Jost&quot;, sans-serif;
+                  font-size: 22px;
+                  font-weight: 600;
+                  margin: 0 0 16px;
+                "
+              >
+                Как измерять
+              </h2>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  gap: 12px;
+                  font-size: 14.5px;
+                  color: #4d5f85;
+                  line-height: 1.6;
+                "
+              >
+                <div style="display: flex; gap: 12px">
+                  <span
+                    style="
+                      font-family: &quot;Jost&quot;, sans-serif;
+                      color: #2e6ff2;
+                      font-weight: 700;
+                    "
+                    >01</span
+                  ><span
+                    >Приложите пластину прибора к макушке так, чтобы корпус
+                    находился перед лицом, а пластина — горизонтально по
+                    уровню</span
+                  >
+                </div>
+                <div style="display: flex; gap: 12px">
+                  <span
+                    style="
+                      font-family: &quot;Jost&quot;, sans-serif;
+                      color: #2e6ff2;
+                      font-weight: 700;
+                    "
+                    >02</span
+                  ><span
+                    >Нажмите кнопку — включится лазер; нажмите ещё раз для
+                    замера за одну секунду</span
+                  >
+                </div>
+                <div style="display: flex; gap: 12px">
+                  <span
+                    style="
+                      font-family: &quot;Jost&quot;, sans-serif;
+                      color: #2e6ff2;
+                      font-weight: 700;
+                    "
+                    >03</span
+                  ><span
+                    >На дисплее отобразится значение роста в метрах. При
+                    необходимости повторите измерение</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div
+              style="
+                background: #2e6ff2;
+                color: #ffffff;
+                border-radius: 20px;
+                padding: 28px;
+              "
+            >
+              <div
+                style="
+                  font-family: &quot;Jost&quot;, sans-serif;
+                  font-weight: 600;
+                  font-size: 20px;
+                  margin-bottom: 8px;
+                "
+              >
+                Кастомизация под заказ
+              </div>
+              <div
+                style="
+                  font-size: 14px;
+                  color: #d8e5ff;
+                  line-height: 1.6;
+                  margin-bottom: 18px;
+                "
+              >
+                Для команд и фондов: логотип на корпусе и дисплее, интеграция
+                передачи данных в вашу базу антропометрии, доработка под
+                методику.
+              </div>
+              <a
+                href="Лендинг SportTechLab v2.dc.html#custom"
+                style="
+                  display: inline-block;
+                  background: #ffffff;
+                  color: #2e6ff2;
+                  padding: 12px 24px;
+                  border-radius: 100px;
+                  font-weight: 800;
+                  font-size: 14px;
+                "
+                style-hover="color: #1b53c9;"
+                >Обсудить проект</a
+              >
+            </div>
+          </div>
+          <div
+            style="
+              background: #ffffff;
+              border: 2px solid #e3eaf8;
+              border-radius: 20px;
+              padding: 30px;
+            "
+          >
+            <h2
+              style="
+                font-family: &quot;Jost&quot;, sans-serif;
+                font-size: 22px;
+                font-weight: 600;
+                margin: 0 0 16px;
+              "
+            >
+              Технические характеристики
+            </h2>
+            <div
+              style="display: flex; flex-direction: column; font-size: 14.5px"
+            >
+              <sc-for list="{{ specs }}" as="s" hint-placeholder-count="10">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 20px;
+                    padding: 10px 0;
+                    border-bottom: 1px solid #eef2fa;
+                  "
+                >
+                  <span style="color: #667699">{{ s.k }}</span>
+                  <span style="font-weight: 800; text-align: right"
+                    >{{ s.v }}</span
+                  >
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== FOOTER ===== -->
+      <footer style="background: #0c1e46; color: #8ea4cf">
+        <div
+          style="
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 36px 24px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            font-size: 14px;
+            flex-wrap: wrap;
+          "
+        >
+          <img
+            src="assets/logo-lst-white.png"
+            alt="ЛСТ"
+            style="height: 24px; width: auto; display: block"
+          />
+          <span
+            style="
+              font-family: &quot;Jost&quot;, sans-serif;
+              font-weight: 700;
+              color: #ffffff;
+              font-size: 14px;
+            "
+            >Лаборатория спортивных технологий</span
+          >
+          <a
+            href="Каталог SportTechLab v2.dc.html"
+            style="color: #8ea4cf"
+            style-hover="color: #ffffff;"
+            >Каталог</a
+          >
+          <a
+            href="Лендинг SportTechLab v2.dc.html#custom"
+            style="color: #8ea4cf"
+            style-hover="color: #ffffff;"
+            >Под заказ</a
+          >
+          <a href="#" style="color: #8ea4cf" style-hover="color: #ffffff;"
+            >VK (скоро)</a
+          >
+          <span style="margin-left: auto"
+            >Москва · работаем по всей России ·
+            <a href="tel:89652369645" style="color: #cfe0ff"
+              >8 965 236-96-45</a
+            ></span
+          >
+        </div>
+      </footer>
+
+      <!-- ===== LEAD MODAL ===== -->
+      <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+        <div
+          onClick="{{ closeModal }}"
+          style="
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(12, 30, 70, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+          "
+        >
+          <div
+            onClick="{{ stopModalClick }}"
+            style="
+              position: relative;
+              background: #ffffff;
+              border-radius: 20px;
+              padding: 36px 32px;
+              max-width: 420px;
+              width: 100%;
+              box-shadow: 0 30px 70px rgba(6, 26, 80, 0.4);
+            "
+          >
+            <button
+              onClick="{{ closeModal }}"
+              style="
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                width: 32px;
+                height: 32px;
+                border-radius: 100px;
+                border: none;
+                background: #f5f8fe;
+                color: #4d5f85;
+                font-size: 15px;
+                font-weight: 700;
+                font-family: &quot;Manrope&quot;, sans-serif;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+              "
+            >
+              ✕
+            </button>
+            <sc-if value="{{ modalSent }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align: center; padding: 12px 0">
+                <div
+                  style="
+                    font-size: 34px;
+                    margin-bottom: 12px;
+                    color: #2e6ff2;
+                    font-weight: 800;
+                  "
+                >
+                  ✓
+                </div>
+                <div
+                  style="
+                    font-family: &quot;Jost&quot;, sans-serif;
+                    font-weight: 600;
+                    font-size: 21px;
+                    margin-bottom: 8px;
+                  "
+                >
+                  Заявка принята
+                </div>
+                <div
+                  style="font-size: 14.5px; color: #4d5f85; line-height: 1.5"
+                >
+                  Перезвоним в течение 15 минут.
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ !modalSent }}" hint-placeholder-val="{{ true }}">
+              <div
+                style="
+                  font-family: &quot;Jost&quot;, sans-serif;
+                  font-weight: 600;
+                  font-size: 22px;
+                  margin: 0 26px 6px 0;
+                "
+              >
+                Оставить заявку
+              </div>
+              <div
+                style="
+                  font-size: 14px;
+                  color: #667699;
+                  margin-bottom: 20px;
+                  line-height: 1.5;
+                "
+              >
+                Оставьте контакты — перезвоним и проконсультируем.
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 12px">
+                <input
+                  placeholder="Ваше имя"
+                  style="
+                    padding: 14px 20px;
+                    border: 2px solid #e3eaf8;
+                    border-radius: 100px;
+                    font-size: 15px;
+                    font-family: &quot;Manrope&quot;, sans-serif;
+                    color: #0c1e46;
+                  "
+                />
+                <input
+                  placeholder="Телефон"
+                  style="
+                    padding: 14px 20px;
+                    border: 2px solid #e3eaf8;
+                    border-radius: 100px;
+                    font-size: 15px;
+                    font-family: &quot;Manrope&quot;, sans-serif;
+                    color: #0c1e46;
+                  "
+                />
+                <button
+                  onClick="{{ modalSubmit }}"
+                  style="
+                    background: #2e6ff2;
+                    color: #ffffff;
+                    border: none;
+                    padding: 15px;
+                    border-radius: 100px;
+                    font-size: 15px;
+                    font-weight: 800;
+                    font-family: &quot;Manrope&quot;, sans-serif;
+                    cursor: pointer;
+                    transition: background 0.2s;
+                  "
+                  style-hover="background: #1b53c9;"
+                >
+                  Отправить заявку
+                </button>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
+    </x-dc>
+    <script type="text/x-dc" data-dc-script>
+      class Component extends DCLogic {
+        state = { photo: 0, modalOpen: false, modalSent: false };
+        static PHOTOS = ['assets/re01-1.png', 'assets/re01-2.png', 'assets/re01-4.png', 'assets/re01-3.png', 'assets/re01-5.png', 'assets/re01-6.png'];
+        renderVals() {
+          const i = this.state.photo;
+          const mainPhotoEl = React.createElement('img', {
+            src: Component.PHOTOS[i],
+            alt: 'Ростомер лазерный РЭ-01',
+            style: { width: '100%', display: 'block', aspectRatio: '4 / 3', objectFit: 'contain', background: '#f5f8fe' }
+          });
+          return {
+            mainPhotoEl,
+            thumbs: Component.PHOTOS.map((src, idx) => ({
+              src,
+              border: idx === i ? '#2e6ff2' : '#e3eaf8',
+              select: () => this.setState({ photo: idx })
+            })),
+            specs: [
+              { k: 'Погрешность', v: '±2 мм' },
+              { k: 'Шаг измерения', v: '1 мм' },
+              { k: 'Отклик', v: '0,1 с' },
+              { k: 'Класс лазера', v: 'II' },
+              { k: 'Габариты', v: '300×65×30±5 мм' },
+              { k: 'Вес', v: '0,110 кг ±5 г' },
+              { k: 'Аккумулятор', v: 'литиевый, 250 мА·ч' },
+              { k: 'Зарядка', v: 'кабель USB' },
+              { k: 'Время работы', v: 'не менее 5 часов' },
+              { k: 'Полная зарядка', v: '1,5–2 ч' },
+              { k: 'Автоотключение лазера', v: '15 с' },
+              { k: 'Хранение заряда', v: 'не менее 6 мес.' }
+            ],
+            modalOpen: this.state.modalOpen,
+            modalSent: this.state.modalSent,
+            openModal: () => this.setState({ modalOpen: true, modalSent: false }),
+            closeModal: () => this.setState({ modalOpen: false }),
+            modalSubmit: () => this.setState({ modalSent: true }),
+            stopModalClick: (e) => e.stopPropagation()
+          };
+        }
+      }
+    </script>
+  </body>
 </html>
