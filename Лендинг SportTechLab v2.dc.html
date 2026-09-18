@@ -132,6 +132,7 @@
               style-hover="color: #cfe0ff;"
               >Почему мы</a
             >
+            <a href="#blog" style="color: #ffffff; white-space: nowrap" style-hover="color: #cfe0ff;">Блог</a>
           </nav>
           <div
             style="
@@ -1280,6 +1281,7 @@
       <!-- ===== 9. BLOG ===== -->
       <sc-if value="{{ showBlog }}" hint-placeholder-val="{{ true }}">
         <section
+          id="blog"
           data-screen-label="Блог"
           style="max-width: 1180px; margin: 0 auto; padding: 44px 24px 88px"
         >
@@ -1302,64 +1304,18 @@
             "
           >
             <sc-for list="{{ posts }}" as="post" hint-placeholder-count="3">
-              <div
-                style="
-                  border: 2px solid #e3eaf8;
-                  border-radius: 20px;
-                  overflow: hidden;
-                  background: #ffffff;
-                  transition:
-                    transform 0.25s,
-                    box-shadow 0.25s;
-                "
-                style-hover="transform: translateY(-4px); box-shadow: 0 16px 36px rgba(12,30,70,0.12);"
-              >
-                <div
-                  style="
-                    height: 150px;
-                    background:
-                      linear-gradient(
-                        rgba(46, 111, 242, 0.5),
-                        rgba(12, 30, 70, 0.4)
-                      ),
-                      repeating-linear-gradient(
-                        45deg,
-                        #3b78ee,
-                        #3b78ee 12px,
-                        #2e6ff2 12px,
-                        #2e6ff2 24px
-                      );
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                  "
-                >
-                  <span
-                    style="font-size: 11px; font-weight: 700; color: #ffffff"
-                    >обложка статьи</span
-                  >
-                </div>
-                <div style="padding: 20px 22px">
-                  <div
-                    style="
-                      font-family: &quot;Jost&quot;, sans-serif;
-                      font-size: 12px;
-                      font-weight: 700;
-                      color: #2e6ff2;
-                      letter-spacing: 1.5px;
-                      text-transform: uppercase;
-                      margin-bottom: 10px;
-                    "
-                  >
-                    {{ post.tag }}
-                  </div>
-                  <div
-                    style="font-weight: 800; font-size: 16px; line-height: 1.4"
-                  >
-                    {{ post.title }}
+              <a href="{{ post.href }}" style="border: 2px solid #e3eaf8; border-radius: 20px; overflow: hidden; background: #ffffff; color: #0c1e46; display: flex; flex-direction: column; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;" style-hover="transform: translateY(-4px); box-shadow: 0 16px 36px rgba(12,30,70,0.12); border-color: #2e6ff2; color: #0c1e46;">
+                <img src="{{ post.cover }}" alt="{{ post.title }}" style="width: 100%; display: block; aspect-ratio: 16 / 9; object-fit: cover;">
+                <div style="padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+                  <div style="font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 700; color: #2e6ff2; letter-spacing: 1.5px; text-transform: uppercase;">{{ post.tag }}</div>
+                  <div style="font-weight: 800; font-size: 16px; line-height: 1.4;">{{ post.title }}</div>
+                  <div style="font-size: 14px; color: #667699; line-height: 1.6; flex: 1;">{{ post.excerpt }}</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 6px; font-size: 13px; font-weight: 800;">
+                    <span style="color: #8494b5;">{{ post.read }}</span>
+                    <span style="color: #2e6ff2;">Читать &#8594;</span>
                   </div>
                 </div>
-              </div>
+              </a>
             </sc-for>
           </div>
         </section>
@@ -1674,6 +1630,7 @@
                 style-hover="color: #2e6ff2;"
                 >Подбор оборудования</a
               >
+        <a href="#blog" style="color: #667699" style-hover="color: #2e6ff2;">Блог</a>
               <button
                 onClick="{{ openModal }}"
                 style="
@@ -1994,9 +1951,9 @@
             ],
             certs: ['сертификат соответствия', 'декларация ТР ТС', 'паспорт изделия', 'гарантийный талон'],
             posts: [
-              { tag: 'Диагностика', title: 'Как измерять высоту прыжка: контактные платформы против оптики' },
-              { tag: 'Тренировки', title: 'Световые тренажёры реакции: что говорят исследования' },
-              { tag: 'Закупки', title: 'Как спортивному фонду закупить оборудование и не переплатить' }
+              { tag: 'Диагностика', title: 'Как измерять высоту прыжка: контактные платформы против оптики', excerpt: 'Два прибора рядом могут разойтись на несколько сантиметров. Разбираем, откуда берётся разница и что выбрать под задачу.', cover: 'assets/blog-jump-cover.png', href: 'Статья Высота прыжка.dc.html', read: '5 мин' },
+              { tag: 'Тренировки', title: 'Световые тренажёры реакции: что говорят исследования', excerpt: 'Что они реально измеряют, какие выводы подтверждены, а где ожидания завышены.', cover: 'assets/blog-reaction-cover.png', href: 'Статья Световые тренажёры.dc.html', read: '4 мин' },
+              { tag: 'Закупки', title: 'Как спортивному фонду закупить оборудование и не переплатить', excerpt: 'Переплата закладывается не на торгах, а раньше — когда пишется техническое задание. Разбираем по шагам.', cover: 'assets/blog-procurement-cover.png', href: 'Статья Закупки оборудования.dc.html', read: '4 мин' }
             ],
             leadLabel: s.leadSent ? 'Заявка отправлена ✓' : 'Получить консультацию',
             leadSubmit: () => this.setState({ leadSent: true }),
