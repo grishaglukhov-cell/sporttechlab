@@ -173,7 +173,7 @@
 
       <!-- ===== PRODUCT ===== -->
       <section
-        data-screen-label="Товар ВВП-01"
+        data-screen-label="Товар ПП-01"
         style="max-width: 1180px; margin: 0 auto; padding: 40px 24px 72px"
       >
         <div
@@ -187,7 +187,7 @@
           <a href="Каталог SportTechLab v2.dc.html" style="color: #2e6ff2"
             >Каталог</a
           >
-          · Прыжок · Платформа ВВП-01
+          · Прыжок · Платформа ПП-01
         </div>
         <div
           style="
@@ -198,15 +198,7 @@
           "
         >
           <div style="display: flex; flex-direction: column; gap: 12px">
-            <div
-              style="
-                position: relative;
-                border-radius: 20px;
-                overflow: hidden;
-                border: 2px solid #e3eaf8;
-                background: #0c1220;
-              "
-            >
+            <div onClick="{{ openZoom }}" title="Нажмите, чтобы увеличить" style="position: relative; border-radius: 20px; overflow: hidden; border: 2px solid #e3eaf8; background: #0c1220; cursor: zoom-in;">
               {{ mainPhotoEl }}
               <img
                 src="assets/logo-lst-white.png"
@@ -236,7 +228,7 @@
                 >
                   <img
                     src="{{ t.src }}"
-                    alt="фото ВВП-01"
+                    alt="фото ПП-01"
                     style="
                       width: 100%;
                       display: block;
@@ -277,7 +269,7 @@
                 text-wrap: pretty;
               "
             >
-              Интеллектуальная платформа для измерения высоты прыжка «ВВП-01»
+              Интеллектуальная платформа для измерения высоты прыжка «ПП-01»
             </h1>
             <p
               style="
@@ -287,10 +279,7 @@
                 margin: 0 0 22px;
               "
             >
-              Контактная платформа для точной диагностики взрывной силы:
-              измеряет высоту вертикального прыжка по времени полёта и
-              автоматически рассчитывает мощность. Полноценная замена дорогим
-              импортным силовым платформам для спортшкол, команд и фондов.
+              Контактная платформа для точной диагностики взрывной силы: измеряет высоту вертикального прыжка.
             </p>
             <div
               style="
@@ -511,7 +500,7 @@
                 line-height: 1.5;
               "
             >
-              <span>· Контактная платформа ВВП-01 — 1 шт</span>
+              <span>· Контактная платформа ПП-01 — 1 шт</span>
               <span>· Пульт / дисплей результатов — 1 шт</span>
               <span>· Кабель Type-C для зарядки — 1 шт</span>
               <span>· Сумка-чехол для переноски — 1 шт</span>
@@ -663,6 +652,20 @@
         </div>
       </footer>
 
+<!-- ===== PHOTO LIGHTBOX ===== -->
+<sc-if value="{{ zoomOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeZoom }}" style="position: fixed; inset: 0; z-index: 1100; background: rgba(6,14,35,0.93); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 24px;">
+    <img src="{{ zoomSrc }}" alt="Фото устройства крупным планом" onClick="{{ stopZoomClick }}" style="max-width: min(1100px, 92vw); max-height: 74vh; object-fit: contain; border-radius: 16px; background: #ffffff;">
+    <div onClick="{{ stopZoomClick }}" style="display: flex; align-items: center; gap: 14px;">
+      <button onClick="{{ prevPhoto }}" style="width: 46px; height: 46px; border-radius: 100px; border: none; background: #ffffff; color: #2e6ff2; font-size: 19px; font-weight: 800; font-family: 'Manrope', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.2s;" style-hover="background: #cfe0ff;">&#8592;</button>
+      <span style="color: #cfe0ff; font-size: 13.5px; font-weight: 800; font-family: 'Manrope', sans-serif; min-width: 64px; text-align: center;">{{ photoCounter }}</span>
+      <button onClick="{{ nextPhoto }}" style="width: 46px; height: 46px; border-radius: 100px; border: none; background: #ffffff; color: #2e6ff2; font-size: 19px; font-weight: 800; font-family: 'Manrope', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.2s;" style-hover="background: #cfe0ff;">&#8594;</button>
+    </div>
+    <button onClick="{{ closeZoom }}" style="position: absolute; top: 22px; right: 26px; width: 40px; height: 40px; border-radius: 100px; border: none; background: rgba(255,255,255,0.14); color: #ffffff; font-size: 16px; font-weight: 700; font-family: 'Manrope', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.2s;" style-hover="background: rgba(255,255,255,0.28);">&#10005;</button>
+  </div>
+</sc-if>
+
+
       <!-- ===== LEAD MODAL ===== -->
       <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
         <div
@@ -813,13 +816,27 @@
     </x-dc>
     <script type="text/x-dc" data-dc-script>
       class Component extends DCLogic {
-        state = { photo: 0, modalOpen: false, modalSent: false };
-        static PHOTOS = ['assets/vvp01-clean.png', 'assets/vvp01-platform.png', 'assets/vvp01-receiver.png'];
+        state = { photo: 0, zoom: false, modalOpen: false, modalSent: false };
+        static PHOTOS = ['assets/vvp01-clean-logo.png', 'assets/vvp01-platform-logo.png', 'assets/vvp01-receiver.png'];
+
+  componentDidMount() {
+    this._onKey = (e) => {
+      if (!this.state.zoom) return;
+      const n = Component.PHOTOS.length;
+      if (e.key === 'Escape') this.setState({ zoom: false });
+      else if (e.key === 'ArrowLeft') this.setState({ photo: (this.state.photo - 1 + n) % n });
+      else if (e.key === 'ArrowRight') this.setState({ photo: (this.state.photo + 1) % n });
+    };
+    window.addEventListener('keydown', this._onKey);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this._onKey);
+  }
         renderVals() {
           const i = this.state.photo;
           const mainPhotoEl = React.createElement('img', {
             src: Component.PHOTOS[i],
-            alt: 'Интеллектуальная платформа ВВП-01',
+            alt: 'Интеллектуальная платформа ПП-01',
             style: { width: '100%', display: 'block', aspectRatio: '4 / 3', objectFit: 'cover' }
           });
           return {
@@ -840,6 +857,14 @@
               { k: 'Время работы', v: 'не менее 12 часов' },
               { k: 'Размер платформы', v: '600×450 мм' }
             ],
+      zoomOpen: this.state.zoom,
+      zoomSrc: Component.PHOTOS[this.state.photo],
+      photoCounter: (this.state.photo + 1) + ' / ' + Component.PHOTOS.length,
+      openZoom: () => this.setState({ zoom: true }),
+      closeZoom: () => this.setState({ zoom: false }),
+      prevPhoto: () => this.setState({ photo: (this.state.photo - 1 + Component.PHOTOS.length) % Component.PHOTOS.length }),
+      nextPhoto: () => this.setState({ photo: (this.state.photo + 1) % Component.PHOTOS.length }),
+      stopZoomClick: (e) => e.stopPropagation(),
             modalOpen: this.state.modalOpen,
             modalSent: this.state.modalSent,
             openModal: () => this.setState({ modalOpen: true, modalSent: false }),

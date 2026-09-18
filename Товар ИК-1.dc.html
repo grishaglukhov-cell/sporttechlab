@@ -198,14 +198,7 @@
           "
         >
           <div style="display: flex; flex-direction: column; gap: 12px">
-            <div
-              style="
-                position: relative;
-                border-radius: 20px;
-                overflow: hidden;
-                border: 2px solid #e3eaf8;
-              "
-            >
+            <div onClick="{{ openZoom }}" title="Нажмите, чтобы увеличить" style="position: relative; border-radius: 20px; overflow: hidden; border: 2px solid #e3eaf8; cursor: zoom-in;">
               <img
                 src="{{ mainPhoto }}"
                 alt="Система электронного хронометража ИК-1"
@@ -233,11 +226,11 @@
             <div
               style="
                 display: grid;
-                grid-template-columns: repeat(5, 1fr);
+                grid-template-columns: repeat(6, 1fr);
                 gap: 10px;
               "
             >
-              <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="5">
+              <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="11">
                 <button
                   onClick="{{ t.select }}"
                   style="padding: 0; border: 2px solid {{ t.border }}; border-radius: 12px; overflow: hidden; cursor: pointer; background: #ffffff; transition: border-color 0.2s;"
@@ -675,6 +668,20 @@
         </div>
       </footer>
 
+<!-- ===== PHOTO LIGHTBOX ===== -->
+<sc-if value="{{ zoomOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeZoom }}" style="position: fixed; inset: 0; z-index: 1100; background: rgba(6,14,35,0.93); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 24px;">
+    <img src="{{ zoomSrc }}" alt="Фото устройства крупным планом" onClick="{{ stopZoomClick }}" style="max-width: min(1100px, 92vw); max-height: 74vh; object-fit: contain; border-radius: 16px; background: #ffffff;">
+    <div onClick="{{ stopZoomClick }}" style="display: flex; align-items: center; gap: 14px;">
+      <button onClick="{{ prevPhoto }}" style="width: 46px; height: 46px; border-radius: 100px; border: none; background: #ffffff; color: #2e6ff2; font-size: 19px; font-weight: 800; font-family: 'Manrope', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.2s;" style-hover="background: #cfe0ff;">&#8592;</button>
+      <span style="color: #cfe0ff; font-size: 13.5px; font-weight: 800; font-family: 'Manrope', sans-serif; min-width: 64px; text-align: center;">{{ photoCounter }}</span>
+      <button onClick="{{ nextPhoto }}" style="width: 46px; height: 46px; border-radius: 100px; border: none; background: #ffffff; color: #2e6ff2; font-size: 19px; font-weight: 800; font-family: 'Manrope', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.2s;" style-hover="background: #cfe0ff;">&#8594;</button>
+    </div>
+    <button onClick="{{ closeZoom }}" style="position: absolute; top: 22px; right: 26px; width: 40px; height: 40px; border-radius: 100px; border: none; background: rgba(255,255,255,0.14); color: #ffffff; font-size: 16px; font-weight: 700; font-family: 'Manrope', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.2s;" style-hover="background: rgba(255,255,255,0.28);">&#10005;</button>
+  </div>
+</sc-if>
+
+
       <!-- ===== LEAD MODAL ===== -->
       <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
         <div
@@ -825,8 +832,22 @@
     </x-dc>
     <script type="text/x-dc" data-dc-script>
       class Component extends DCLogic {
-        state = { photo: 0, modalOpen: false, modalSent: false };
-        static PHOTOS = ['assets/ik1-cover.png', 'assets/ik1-image1.jpeg', 'assets/ik1-image3.png', 'assets/ik1-image7.jpeg', 'assets/ik1-image9.jpeg'];
+        state = { photo: 0, zoom: false, modalOpen: false, modalSent: false };
+        static PHOTOS = ['assets/ik1-cover.png', 'assets/ik1-image1.jpeg', 'assets/ik1-image2.jpeg', 'assets/ik1-image3.png', 'assets/ik1-image4.png', 'assets/ik1-image5.png', 'assets/ik1-image6.png', 'assets/ik1-image7.jpeg', 'assets/ik1-image8.jpeg', 'assets/ik1-image9.jpeg', 'assets/ik1-image10.jpeg'];
+
+  componentDidMount() {
+    this._onKey = (e) => {
+      if (!this.state.zoom) return;
+      const n = Component.PHOTOS.length;
+      if (e.key === 'Escape') this.setState({ zoom: false });
+      else if (e.key === 'ArrowLeft') this.setState({ photo: (this.state.photo - 1 + n) % n });
+      else if (e.key === 'ArrowRight') this.setState({ photo: (this.state.photo + 1) % n });
+    };
+    window.addEventListener('keydown', this._onKey);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this._onKey);
+  }
         renderVals() {
           const i = this.state.photo;
           return {
@@ -848,6 +869,14 @@
               { k: 'Размер датчика', v: '75×45×25 мм' },
               { k: 'Высота кронштейна', v: '31–142 см' }
             ],
+      zoomOpen: this.state.zoom,
+      zoomSrc: Component.PHOTOS[this.state.photo],
+      photoCounter: (this.state.photo + 1) + ' / ' + Component.PHOTOS.length,
+      openZoom: () => this.setState({ zoom: true }),
+      closeZoom: () => this.setState({ zoom: false }),
+      prevPhoto: () => this.setState({ photo: (this.state.photo - 1 + Component.PHOTOS.length) % Component.PHOTOS.length }),
+      nextPhoto: () => this.setState({ photo: (this.state.photo + 1) % Component.PHOTOS.length }),
+      stopZoomClick: (e) => e.stopPropagation(),
             modalOpen: this.state.modalOpen,
             modalSent: this.state.modalSent,
             openModal: () => this.setState({ modalOpen: true, modalSent: false }),
