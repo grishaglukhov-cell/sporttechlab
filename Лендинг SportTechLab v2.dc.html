@@ -1193,52 +1193,16 @@
 
       <!-- ===== 8. CERTIFICATES ===== -->
       <sc-if value="{{ showCertificates }}" hint-placeholder-val="{{ true }}">
-        <section
-          data-screen-label="Сертификаты"
-          style="max-width: 1180px; margin: 0 auto; padding: 88px 24px 44px"
-        >
-          <h2
-            style="
-              font-family: &quot;Jost&quot;, sans-serif;
-              font-size: 30px;
-              font-weight: 600;
-              margin: 0 0 28px;
-              letter-spacing: -0.5px;
-            "
-          >
-            Сертификаты и документы
-          </h2>
-          <div
-            style="
-              display: grid;
-              grid-template-columns: repeat(4, 1fr);
-              gap: 18px;
-            "
-          >
-            <sc-for list="{{ certs }}" as="c" hint-placeholder-count="4">
-              <div
-                style="
-                  aspect-ratio: 1 / 1;
-                  border: 2px solid #e3eaf8;
-                  border-radius: 16px;
-                  background: #f5f8fe;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  text-align: center;
-                  padding: 16px;
-                "
-              >
-                <span
-                  style="
-                    font-size: 12px;
-                    font-weight: 700;
-                    color: #8494b5;
-                    line-height: 1.6;
-                  "
-                  >{{ c }}</span
-                >
-              </div>
+        <section id="documents" data-screen-label="Сертификаты" style="max-width: 1180px; margin: 0 auto; padding: 88px 24px 44px">
+          <h2 style="font-family: 'Jost', sans-serif; font-size: 30px; font-weight: 600; margin: 0 0 28px; letter-spacing: -0.5px;">Сертификаты и документы</h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 18px;">
+            <sc-for list="{{ certs }}" as="c" hint-placeholder-count="5">
+              <a href="{{ c.href }}" target="_blank" rel="noopener" style="border: 2px solid #e3eaf8; border-radius: 16px; background: #f5f8fe; padding: 24px; display: flex; flex-direction: column; gap: 14px; color: #0c1e46; min-height: 190px; text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s;" style-hover="border-color: #2e6ff2; box-shadow: 0 12px 28px rgba(12,30,70,0.08); color: #0c1e46;">
+                <span style="font-size: 12px; font-weight: 800; color: #2e6ff2; text-transform: uppercase; letter-spacing: 0.7px;">{{ c.kind }}</span>
+                <span style="font-size: 17px; font-weight: 700; line-height: 1.45; flex: 1;">{{ c.title }}</span>
+                <span style="font-size: 12px; color: #667699;">PDF · {{ c.size }}</span>
+                <span style="font-size: 14px; font-weight: 800; color: #2e6ff2;">Открыть документ ↗</span>
+              </a>
             </sc-for>
           </div>
         </section>
@@ -1915,7 +1879,7 @@
               { n: '05', title: 'Протестировано практикой', desc: 'Продукция проверена крупнейшим поставщиком ООО «Стань чемпионом».' },
               { n: '06', title: 'Доставка по всей России', desc: 'Отправим любой транспортной компанией в любой регион.' }
             ],
-            certs: ['сертификат соответствия', 'декларация ТР ТС', 'паспорт изделия', 'гарантийный талон'],
+            certs: [{"title": "Платформа для измерения высоты вертикального прыжка", "kind": "Декларация", "href": "assets/documents/jump-platform-declaration.pdf", "size": "335 КБ"}, {"title": "Электронная рулетка", "kind": "Декларация", "href": "assets/documents/electronic-tape-declaration.pdf", "size": "333 КБ"}, {"title": "Система электронного хронометража", "kind": "Декларация", "href": "assets/documents/timing-system-declaration.pdf", "size": "454 КБ"}, {"title": "Электронный антропометр", "kind": "Декларация", "href": "assets/documents/anthropometer-declaration.pdf", "size": "456 КБ"}, {"title": "Гимнастическая палка", "kind": "Отказное письмо", "href": "assets/documents/gymnastics-stick-letter.pdf", "size": "409 КБ"}],
             posts: [
               { tag: 'Диагностика', title: 'Как измерять высоту прыжка: контактные платформы против оптики', excerpt: 'Два прибора рядом могут разойтись на несколько сантиметров. Разбираем, откуда берётся разница и что выбрать под задачу.', cover: 'assets/blog-jump-cover.png', href: 'Статья Высота прыжка.dc.html', read: '5 мин' },
               { tag: 'Тренировки', title: 'Световые тренажёры реакции: что говорят исследования', excerpt: 'Что они реально измеряют, какие выводы подтверждены, а где ожидания завышены.', cover: 'assets/blog-reaction-cover.png', href: 'Статья Световые тренажёры.dc.html', read: '4 мин' },
