@@ -133,7 +133,11 @@
         <div style="display: flex; flex-direction: column; gap: 12px;">
           <input placeholder="Ваше имя" style="padding: 14px 20px; border: 2px solid #e3eaf8; border-radius: 100px; font-size: 15px; font-family: 'Manrope', sans-serif; color: #0c1e46;">
           <input placeholder="Телефон" style="padding: 14px 20px; border: 2px solid #e3eaf8; border-radius: 100px; font-size: 15px; font-family: 'Manrope', sans-serif; color: #0c1e46;">
-          <button onClick="{{ modalSubmit }}" style="background: #2e6ff2; color: #ffffff; border: none; padding: 15px; border-radius: 100px; font-size: 15px; font-weight: 800; font-family: 'Manrope', sans-serif; cursor: pointer; transition: background 0.2s;" style-hover="background: #1b53c9;">Отправить заявку</button>
+          <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 12px; line-height: 1.6; color: #667699; cursor: pointer; text-align: left;">
+                  <input type="checkbox" data-personal-consent="true" required aria-label="Согласие на обработку персональных данных" style="width: 18px; height: 18px; flex-shrink: 0; margin: 2px 0 0; accent-color: #2e6ff2;" />
+                  <span>Я даю согласие на обработку указанных мной персональных данных для связи со мной и обработки моей заявки.</span>
+                </label>
+                <button onClick="{{ modalSubmit }}" style="background: #2e6ff2; color: #ffffff; border: none; padding: 15px; border-radius: 100px; font-size: 15px; font-weight: 800; font-family: 'Manrope', sans-serif; cursor: pointer; transition: background 0.2s;" style-hover="background: #1b53c9;">Отправить заявку</button>
         </div>
       </sc-if>
     </div>
@@ -142,6 +146,16 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
+        hasPersonalConsent(e) {
+          const box = e.currentTarget.parentElement.querySelector('input[data-personal-consent]');
+          if (!box || !box.checked) {
+            if (box) { box.setCustomValidity('Пожалуйста, подтвердите согласие на обработку персональных данных.'); box.reportValidity(); box.focus(); }
+            return false;
+          }
+          box.setCustomValidity('');
+          return true;
+        }
+
   state = { modalOpen: false, modalSent: false };
   renderVals() {
     return {
@@ -149,7 +163,7 @@ class Component extends DCLogic {
       modalSent: this.state.modalSent,
       openModal: () => this.setState({ modalOpen: true, modalSent: false }),
       closeModal: () => this.setState({ modalOpen: false }),
-      modalSubmit: () => this.setState({ modalSent: true }),
+      modalSubmit: (e) => { if (!this.hasPersonalConsent(e)) return; this.setState({ modalSent: true }); },
       stopModalClick: (e) => e.stopPropagation()
     };
   }

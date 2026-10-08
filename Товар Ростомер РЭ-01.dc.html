@@ -767,6 +767,10 @@
                     color: #0c1e46;
                   "
                 />
+                <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 12px; line-height: 1.6; color: #667699; cursor: pointer; text-align: left;">
+                  <input type="checkbox" data-personal-consent="true" required aria-label="Согласие на обработку персональных данных" style="width: 18px; height: 18px; flex-shrink: 0; margin: 2px 0 0; accent-color: #2e6ff2;" />
+                  <span>Я даю согласие на обработку указанных мной персональных данных для связи со мной и обработки моей заявки.</span>
+                </label>
                 <button
                   onClick="{{ modalSubmit }}"
                   style="
@@ -793,6 +797,16 @@
     </x-dc>
     <script type="text/x-dc" data-dc-script>
       class Component extends DCLogic {
+        hasPersonalConsent(e) {
+          const box = e.currentTarget.parentElement.querySelector('input[data-personal-consent]');
+          if (!box || !box.checked) {
+            if (box) { box.setCustomValidity('Пожалуйста, подтвердите согласие на обработку персональных данных.'); box.reportValidity(); box.focus(); }
+            return false;
+          }
+          box.setCustomValidity('');
+          return true;
+        }
+
         state = { photo: 0, zoom: false, modalOpen: false, modalSent: false };
         static PHOTOS = ['assets/re01-1.png', 'assets/re01-2.png', 'assets/re01-4.png', 'assets/re01-3.png', 'assets/re01-5.png', 'assets/re01-6.png'];
 
@@ -849,7 +863,7 @@
             modalSent: this.state.modalSent,
             openModal: () => this.setState({ modalOpen: true, modalSent: false }),
             closeModal: () => this.setState({ modalOpen: false }),
-            modalSubmit: () => this.setState({ modalSent: true }),
+            modalSubmit: (e) => { if (!this.hasPersonalConsent(e)) return; this.setState({ modalSent: true }); },
             stopModalClick: (e) => e.stopPropagation()
           };
         }

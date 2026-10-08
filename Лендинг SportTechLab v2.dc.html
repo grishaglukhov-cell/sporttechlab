@@ -851,6 +851,10 @@
                     font-family: &quot;Manrope&quot;, sans-serif;
                   "
                 />
+                <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 12px; line-height: 1.6; color: #667699; cursor: pointer; text-align: left;">
+                  <input type="checkbox" data-personal-consent="true" required aria-label="Согласие на обработку персональных данных" style="width: 18px; height: 18px; flex-shrink: 0; margin: 2px 0 0; accent-color: #2e6ff2;" />
+                  <span>Я даю согласие на обработку указанных мной персональных данных для связи со мной и обработки моей заявки.</span>
+                </label>
                 <button
                   onClick="{{ quizSubmit }}"
                   style="
@@ -1391,7 +1395,11 @@
                 resize: vertical;
               "
             ></textarea>
-            <button
+            <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 12px; line-height: 1.6; color: #667699; cursor: pointer; text-align: left;">
+                  <input type="checkbox" data-personal-consent="true" required aria-label="Согласие на обработку персональных данных" style="width: 18px; height: 18px; flex-shrink: 0; margin: 2px 0 0; accent-color: #2e6ff2;" />
+                  <span>Я даю согласие на обработку указанных мной персональных данных для связи со мной и обработки моей заявки.</span>
+                </label>
+                <button
               onClick="{{ leadSubmit }}"
               style="
                 background: #2e6ff2;
@@ -1409,10 +1417,7 @@
             >
               {{ leadLabel }}
             </button>
-            <span style="font-size: 12px; color: #8494b5"
-              >Нажимая кнопку, вы соглашаетесь с обработкой персональных
-              данных</span
-            >
+            
           </div>
         </div>
       </section>
@@ -1784,6 +1789,10 @@
                     color: #0c1e46;
                   "
                 />
+                <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 12px; line-height: 1.6; color: #667699; cursor: pointer; text-align: left;">
+                  <input type="checkbox" data-personal-consent="true" required aria-label="Согласие на обработку персональных данных" style="width: 18px; height: 18px; flex-shrink: 0; margin: 2px 0 0; accent-color: #2e6ff2;" />
+                  <span>Я даю согласие на обработку указанных мной персональных данных для связи со мной и обработки моей заявки.</span>
+                </label>
                 <button
                   onClick="{{ modalSubmit }}"
                   style="
@@ -1814,6 +1823,16 @@
       data-props='{"showCertificates": {"editor": "boolean", "default": true, "tsType": "boolean", "section": "Блоки"}, "showBlog": {"editor": "boolean", "default": true, "tsType": "boolean", "section": "Блоки"}}'
     >
       class Component extends DCLogic {
+        hasPersonalConsent(e) {
+          const box = e.currentTarget.parentElement.querySelector('input[data-personal-consent]');
+          if (!box || !box.checked) {
+            if (box) { box.setCustomValidity('Пожалуйста, подтвердите согласие на обработку персональных данных.'); box.reportValidity(); box.focus(); }
+            return false;
+          }
+          box.setCustomValidity('');
+          return true;
+        }
+
         state = { c1: 0, c2: 0, c3: 0, quizStep: 0, quizPhase: 'questions', leadSent: false, modalOpen: false, modalSent: false };
 
         static QUIZ = [
@@ -1864,7 +1883,7 @@
                 else this.setState({ quizStep: s.quizStep + 1 });
               }
             })),
-            quizSubmit: () => this.setState({ quizPhase: 'done' }),
+            quizSubmit: (e) => { if (!this.hasPersonalConsent(e)) return; this.setState({ quizPhase: 'done' }); },
             audience: [
               { title: 'Школы и колледжи', desc: 'Объективная сдача нормативов ГТО, контрольные по физкультуре и отчётность для администрации.' },
               { title: 'ДЮСШ и спортивные клубы', desc: 'Мониторинг прогресса юных атлетов, отбор в группы подготовки и аргументы для родителей.' },
@@ -1886,12 +1905,12 @@
               { tag: 'Закупки', title: 'Как спортивному фонду закупить оборудование и не переплатить', excerpt: 'Переплата закладывается не на торгах, а раньше — когда пишется техническое задание. Разбираем по шагам.', cover: 'assets/blog-procurement-cover.png', href: 'Статья Закупки оборудования.dc.html', read: '4 мин' }
             ],
             leadLabel: s.leadSent ? 'Заявка отправлена ✓' : 'Получить консультацию',
-            leadSubmit: () => this.setState({ leadSent: true }),
+            leadSubmit: (e) => { if (!this.hasPersonalConsent(e)) return; this.setState({ leadSent: true }); },
             modalOpen: s.modalOpen,
             modalSent: s.modalSent,
             openModal: () => this.setState({ modalOpen: true, modalSent: false }),
             closeModal: () => this.setState({ modalOpen: false }),
-            modalSubmit: () => this.setState({ modalSent: true }),
+            modalSubmit: (e) => { if (!this.hasPersonalConsent(e)) return; this.setState({ modalSent: true }); },
             stopModalClick: (e) => e.stopPropagation()
           };
         }
