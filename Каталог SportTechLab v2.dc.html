@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="./support.js"></script>
+      <link rel="stylesheet" href="assets/mobile.css" />
   </head>
   <body>
     <x-dc>
@@ -212,7 +213,7 @@
             margin: 0 auto;
             padding: 56px 24px 48px;
           "
-        >
+         data-responsive-container="true">
           <h1
             style="
               font-family: &quot;Jost&quot;, sans-serif;
@@ -243,7 +244,7 @@
       <section
         data-screen-label="Каталог"
         style="max-width: 1180px; margin: 0 auto; padding: 40px 24px 88px"
-      >
+       data-responsive-container="true">
         <div
           style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px"
         >
@@ -263,7 +264,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
           "
-        >
+         data-responsive-grid="cards">
           <sc-for list="{{ products }}" as="p" hint-placeholder-count="9">
             <a
               href="{{ p.href }}"
@@ -430,7 +431,7 @@
             color: #ffffff;
             overflow: hidden;
           "
-        >
+         data-responsive-panel="true">
           <div
             aria-hidden="true"
             style="
@@ -559,7 +560,7 @@
             justify-content: center;
             padding: 20px;
           "
-        >
+         data-responsive-overlay="true">
           <div
             onClick="{{ stopModalClick }}"
             style="
@@ -571,7 +572,7 @@
               width: 100%;
               box-shadow: 0 30px 70px rgba(6, 26, 80, 0.4);
             "
-          >
+           data-responsive-panel="true" data-responsive-dialog="true">
             <button
               onClick="{{ closeModal }}"
               style="

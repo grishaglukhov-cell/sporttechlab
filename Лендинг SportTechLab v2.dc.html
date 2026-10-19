@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="./support.js"></script>
+      <link rel="stylesheet" href="assets/mobile.css" />
   </head>
   <body>
     <x-dc>
@@ -229,7 +230,7 @@
             gap: 48px;
             align-items: center;
           "
-        >
+         data-responsive-grid="split" data-responsive-container="true">
           <div>
             <div
               style="
@@ -346,7 +347,7 @@
       </section>
 
       <!-- ===== 2. PROBLEM / SOLUTION ===== -->
-      <section style="max-width: 1180px; margin: 0 auto; padding: 88px 24px">
+      <section style="max-width: 1180px; margin: 0 auto; padding: 88px 24px" data-responsive-container="true">
         <h2
           style="
             font-family: &quot;Jost&quot;, sans-serif;
@@ -370,7 +371,7 @@
         >
           Спортивным организациям годами продают одни и те же решения. Мы разрабатываем качественный и универсальный продукт: объединяем лучшие методики со всего мира и применяем передовые технологии для спорта — инструменты, которые реально работают в текущих условиях.
         </p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px" data-responsive-grid="split">
           <div
             style="
               border: 2px solid #e3eaf8;
@@ -378,7 +379,7 @@
               padding: 34px;
               background: #f5f8fe;
             "
-          >
+           data-responsive-panel="true">
             <div
               style="
                 font-family: &quot;Jost&quot;, sans-serif;
@@ -428,7 +429,7 @@
               color: #ffffff;
               box-shadow: 0 16px 44px rgba(46, 111, 242, 0.35);
             "
-          >
+           data-responsive-panel="true">
             <div
               style="
                 font-family: &quot;Jost&quot;, sans-serif;
@@ -520,7 +521,7 @@
             margin: 0 auto;
             padding: 88px 24px;
           "
-        >
+         data-responsive-container="true">
           <div
             style="
               max-width: 640px;
@@ -576,7 +577,7 @@
               gap: 18px;
               margin-bottom: 40px;
             "
-          >
+           data-responsive-grid="cards">
             <div
               style="
                 background: rgba(255, 255, 255, 0.1);
@@ -584,7 +585,7 @@
                 border-radius: 20px;
                 padding: 28px;
               "
-            >
+             data-responsive-panel="true">
               <div
                 style="
                   font-family: &quot;Jost&quot;, sans-serif;
@@ -613,7 +614,7 @@
                 border-radius: 20px;
                 padding: 28px;
               "
-            >
+             data-responsive-panel="true">
               <div
                 style="
                   font-family: &quot;Jost&quot;, sans-serif;
@@ -642,7 +643,7 @@
                 border-radius: 20px;
                 padding: 28px;
               "
-            >
+             data-responsive-panel="true">
               <div
                 style="
                   font-family: &quot;Jost&quot;, sans-serif;
@@ -694,7 +695,7 @@
         id="quiz"
         data-screen-label="Квиз"
         style="max-width: 1180px; margin: 0 auto; padding: 88px 24px"
-      >
+       data-responsive-container="true">
         <div
           style="
             display: grid;
@@ -702,7 +703,7 @@
             gap: 48px;
             align-items: start;
           "
-        >
+         data-responsive-grid="split">
           <div>
             <h2
               style="
@@ -735,7 +736,7 @@
               padding: 32px;
               box-shadow: 0 12px 44px rgba(12, 30, 70, 0.08);
             "
-          >
+           data-responsive-panel="true">
             <sc-if value="{{ quizActive }}" hint-placeholder-val="{{ true }}">
               <div
                 style="
@@ -912,7 +913,7 @@
       <section
         data-screen-label="Кому подходит"
         style="max-width: 1180px; margin: 0 auto; padding: 88px 24px"
-      >
+       data-responsive-container="true">
         <div
           style="
             font-family: &quot;Jost&quot;, sans-serif;
@@ -944,7 +945,7 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 18px;
           "
-        >
+         data-responsive-grid="cards">
           <sc-for list="{{ audience }}" as="a" hint-placeholder-count="4">
             <div
               style="
@@ -957,7 +958,7 @@
                   box-shadow 0.25s;
               "
               style-hover="border-color: #2e6ff2; box-shadow: 0 14px 34px rgba(46,111,242,0.14);"
-            >
+             data-responsive-panel="true">
               <div
                 style="
                   font-family: &quot;Jost&quot;, sans-serif;
@@ -986,7 +987,7 @@
           border-bottom: 1px solid #e3eaf8;
         "
       >
-        <div style="max-width: 1180px; margin: 0 auto; padding: 88px 24px">
+        <div style="max-width: 1180px; margin: 0 auto; padding: 88px 24px" data-responsive-container="true">
           <h2
             style="
               font-family: &quot;Jost&quot;, sans-serif;
@@ -1004,7 +1005,7 @@
               grid-template-columns: repeat(3, 1fr);
               gap: 18px;
             "
-          >
+           data-responsive-grid="cards">
             <sc-for list="{{ reasons }}" as="r" hint-placeholder-count="6">
               <div
                 style="
@@ -1017,7 +1018,7 @@
                     box-shadow 0.25s;
                 "
                 style-hover="border-color: #2e6ff2; box-shadow: 0 12px 32px rgba(46,111,242,0.15);"
-              >
+               data-responsive-panel="true">
                 <div
                   style="
                     font-family: &quot;Jost&quot;, sans-serif;
@@ -1088,7 +1089,7 @@
             margin: 0 auto;
             padding: 80px 24px;
           "
-        >
+         data-responsive-container="true">
           <h2
             style="
               font-family: &quot;Jost&quot;, sans-serif;
@@ -1106,7 +1107,7 @@
               grid-template-columns: repeat(3, 1fr);
               gap: 18px;
             "
-          >
+           data-responsive-grid="cards">
             <div
               style="
                 background: rgba(255, 255, 255, 0.1);
@@ -1114,7 +1115,7 @@
                 border-radius: 20px;
                 padding: 30px;
               "
-            >
+             data-responsive-panel="true">
               <div
                 style="
                   font-family: &quot;Jost&quot;, sans-serif;
@@ -1142,7 +1143,7 @@
                 border-radius: 20px;
                 padding: 30px;
               "
-            >
+             data-responsive-panel="true">
               <div
                 style="
                   font-family: &quot;Jost&quot;, sans-serif;
@@ -1170,7 +1171,7 @@
                 border-radius: 20px;
                 padding: 30px;
               "
-            >
+             data-responsive-panel="true">
               <div
                 style="
                   font-family: &quot;Jost&quot;, sans-serif;
@@ -1197,9 +1198,9 @@
 
       <!-- ===== 8. CERTIFICATES ===== -->
       <sc-if value="{{ showCertificates }}" hint-placeholder-val="{{ true }}">
-        <section id="documents" data-screen-label="Сертификаты" style="max-width: 1180px; margin: 0 auto; padding: 88px 24px 44px">
+        <section id="documents" data-screen-label="Сертификаты" style="max-width: 1180px; margin: 0 auto; padding: 88px 24px 44px" data-responsive-container="true">
           <h2 style="font-family: 'Jost', sans-serif; font-size: 30px; font-weight: 600; margin: 0 0 28px; letter-spacing: -0.5px;">Сертификаты и документы</h2>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 18px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 18px;" data-responsive-grid="cards">
             <sc-for list="{{ certs }}" as="c" hint-placeholder-count="5">
               <a href="{{ c.href }}" target="_blank" rel="noopener" style="border: 2px solid #e3eaf8; border-radius: 16px; background: #f5f8fe; padding: 24px; display: flex; flex-direction: column; gap: 14px; color: #0c1e46; min-height: 190px; text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s;" style-hover="border-color: #2e6ff2; box-shadow: 0 12px 28px rgba(12,30,70,0.08); color: #0c1e46;">
                 <span style="font-size: 12px; font-weight: 800; color: #2e6ff2; text-transform: uppercase; letter-spacing: 0.7px;">{{ c.kind }}</span>
@@ -1218,7 +1219,7 @@
           id="blog"
           data-screen-label="Блог"
           style="max-width: 1180px; margin: 0 auto; padding: 44px 24px 88px"
-        >
+         data-responsive-container="true">
           <h2
             style="
               font-family: &quot;Jost&quot;, sans-serif;
@@ -1236,7 +1237,7 @@
               grid-template-columns: repeat(3, 1fr);
               gap: 18px;
             "
-          >
+           data-responsive-grid="cards">
             <sc-for list="{{ posts }}" as="post" hint-placeholder-count="3">
               <a href="{{ post.href }}" style="border: 2px solid #e3eaf8; border-radius: 20px; overflow: hidden; background: #ffffff; color: #0c1e46; display: flex; flex-direction: column; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;" style-hover="transform: translateY(-4px); box-shadow: 0 16px 36px rgba(12,30,70,0.12); border-color: #2e6ff2; color: #0c1e46;">
                 <img src="{{ post.cover }}" alt="{{ post.title }}" style="width: 100%; display: block; aspect-ratio: 16 / 9; object-fit: cover;">
@@ -1302,7 +1303,7 @@
             gap: 56px;
             align-items: center;
           "
-        >
+         data-responsive-grid="split" data-responsive-container="true">
           <div>
             <h2
               style="
@@ -1348,7 +1349,7 @@
               gap: 13px;
               box-shadow: 0 24px 60px rgba(6, 26, 80, 0.35);
             "
-          >
+           data-responsive-panel="true">
             <input
               placeholder="Ваше имя"
               style="
@@ -1439,7 +1440,7 @@
             grid-template-columns: 1.4fr 1fr 1fr;
             gap: 40px;
           "
-        >
+         data-responsive-grid="split" data-responsive-container="true">
           <div>
             <div
               style="
@@ -1680,7 +1681,7 @@
             justify-content: center;
             padding: 20px;
           "
-        >
+         data-responsive-overlay="true">
           <div
             onClick="{{ stopModalClick }}"
             style="
@@ -1692,7 +1693,7 @@
               width: 100%;
               box-shadow: 0 30px 70px rgba(6, 26, 80, 0.4);
             "
-          >
+           data-responsive-panel="true" data-responsive-dialog="true">
             <button
               onClick="{{ closeModal }}"
               style="

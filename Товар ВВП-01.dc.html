@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="./support.js"></script>
+      <link rel="stylesheet" href="assets/mobile.css" />
   </head>
   <body>
     <x-dc>
@@ -175,7 +176,7 @@
       <section
         data-screen-label="Товар ПП-01"
         style="max-width: 1180px; margin: 0 auto; padding: 40px 24px 72px"
-      >
+       data-responsive-container="true">
         <div
           style="
             font-size: 13px;
@@ -196,7 +197,7 @@
             gap: 48px;
             align-items: start;
           "
-        >
+         data-responsive-grid="split">
           <div style="display: flex; flex-direction: column; gap: 12px">
             <div onClick="{{ openZoom }}" title="Нажмите, чтобы увеличить" style="position: relative; border-radius: 20px; overflow: hidden; border: 2px solid #e3eaf8; background: #0c1220; cursor: zoom-in;">
               {{ mainPhotoEl }}
@@ -220,7 +221,7 @@
                 grid-template-columns: repeat(3, 1fr);
                 gap: 10px;
               "
-            >
+             data-responsive-grid="cards">
               <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="3">
                 <button
                   onClick="{{ t.select }}"
@@ -412,7 +413,7 @@
             gap: 20px;
             align-items: start;
           "
-        >
+         data-responsive-grid="split" data-responsive-container="true">
           <div
             style="
               background: #ffffff;
@@ -420,7 +421,7 @@
               border-radius: 20px;
               padding: 30px;
             "
-          >
+           data-responsive-panel="true">
             <h2
               style="
                 font-family: &quot;Jost&quot;, sans-serif;
@@ -515,7 +516,7 @@
                 border-radius: 20px;
                 padding: 30px;
               "
-            >
+             data-responsive-panel="true">
               <h2
                 style="
                   font-family: &quot;Jost&quot;, sans-serif;
@@ -538,7 +539,7 @@
                       padding: 10px 0;
                       border-bottom: 1px solid #eef2fa;
                     "
-                  >
+                   data-responsive-spec-row="true">
                     <span style="color: #667699">{{ s.k }}</span>
                     <span style="font-weight: 800; text-align: right"
                       >{{ s.v }}</span
@@ -554,7 +555,7 @@
                 border-radius: 20px;
                 padding: 28px;
               "
-            >
+             data-responsive-panel="true">
               <div
                 style="
                   font-family: &quot;Jost&quot;, sans-serif;
@@ -655,7 +656,7 @@
 
 <!-- ===== PHOTO LIGHTBOX ===== -->
 <sc-if value="{{ zoomOpen }}" hint-placeholder-val="{{ false }}">
-  <div onClick="{{ closeZoom }}" style="position: fixed; inset: 0; z-index: 1100; background: rgba(6,14,35,0.93); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 24px;">
+  <div onClick="{{ closeZoom }}" style="position: fixed; inset: 0; z-index: 1100; background: rgba(6,14,35,0.93); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 24px;" data-responsive-overlay="true">
     <img src="{{ zoomSrc }}" alt="Фото устройства крупным планом" onClick="{{ stopZoomClick }}" style="max-width: min(1100px, 92vw); max-height: 74vh; object-fit: contain; border-radius: 16px; background: #ffffff;">
     <div onClick="{{ stopZoomClick }}" style="display: flex; align-items: center; gap: 14px;">
       <button onClick="{{ prevPhoto }}" style="width: 46px; height: 46px; border-radius: 100px; border: none; background: #ffffff; color: #2e6ff2; font-size: 19px; font-weight: 800; font-family: 'Manrope', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.2s;" style-hover="background: #cfe0ff;">&#8592;</button>
@@ -681,7 +682,7 @@
             justify-content: center;
             padding: 20px;
           "
-        >
+         data-responsive-overlay="true">
           <div
             onClick="{{ stopModalClick }}"
             style="
@@ -693,7 +694,7 @@
               width: 100%;
               box-shadow: 0 30px 70px rgba(6, 26, 80, 0.4);
             "
-          >
+           data-responsive-panel="true" data-responsive-dialog="true">
             <button
               onClick="{{ closeModal }}"
               style="
